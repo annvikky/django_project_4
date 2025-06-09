@@ -1,0 +1,42 @@
+{% extends 'mailing_management/base.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            {% if user.avatar %}
+                <img src="{{ user.avatar.url }}" class="img-thumbnail rounded-circle mb-3" width="200" height="200" alt="Аватар">
+            {% else %}
+                <img src="{% static 'default-avatar.png' %}" class="img-thumbnail rounded-circle mb-3" width="200" height="200" alt="Аватар по умолчанию">
+            {% endif %}
+            <h4>{{ user.username }}</h4>
+            <p class="text-muted">{{ user.email }}</p>
+        </div>
+        <div class="col-md-8">
+            <h3>Личная информация</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Телефон:</strong> {{ user.phone_number|default:"—" }}</li>
+                <li class="list-group-item"><strong>Страна:</strong> {{ user.country|default:"—" }}</li>
+            </ul>
+<!--            <a href="{% url 'users:logout' %}" class="btn btn-danger mt-4">Выйти</a>-->
+            <h3 class="mt-4">Статистика рассылок</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Всего рассылок:</strong> {{ total_mailings }}</li>
+                <li class="list-group-item"><strong>Успешные попытки:</strong> {{ successful_attempts }}</li>
+                <li class="list-group-item"><strong>Неуспешные попытки:</strong> {{ unsuccessful_attempts }}</li>
+                <li class="list-group-item"><strong>Всего попыток:</strong> {{ total_attempts }}
+                <li class="list-group-item"><strong>Последняя попытка отправки:</strong>
+                    {{ last_attempt_date|date:"d.m.Y H:i" | default:"—" }}</li>
+            </ul>
+
+            <a href="{{ mailings_list_url }}" class="btn btn-primary mt-3">Перейти к рассылкам</a>
+
+            <div class="mt-4">
+                <a href="{% url 'users:edit_profile' %}" class="btn btn-outline-primary">Редактировать профиль</a>
+                <a href="{% url 'users:delete_profile' %}" class="btn btn-outline-danger ms-2">Удалить профиль</a>
+                <a href="{% url 'users:logout' %}" class="btn btn-danger mt-2 d-block">Выйти</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

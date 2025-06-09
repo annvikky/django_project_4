@@ -1,0 +1,46 @@
+<!-- mailing_management/templates/mailing_management/recipients_list.html -->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h2 class="mb-4 text-center">Список получателей рассылки</h2>
+
+    <a href="/recipients/create/" class="btn btn-success mb-3">Добавить получателя</a>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover bg-white shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">№</th>
+            <th scope="col">Почта</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Комментарий</th>
+            <th scope="col">Действия</th>
+          </tr>
+        </thead>
+        <tbody>
+           {% for recipient in recipients %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ recipient.email }}</td>
+            <td>{{ recipient.name }}</td>
+            <td>{{ recipient.comment }}</td>
+            <td>
+              {% if perms.mailing_management.change_recipient or user == recipient.user %}
+              <a href="/recipients/{{ recipient.id }}" class="btn btn-sm btn-primary">Просмотр</a>
+              <a href="/recipients/{{ recipient.id }}/update" class="btn btn-sm btn-secondary">Редактировать</a>
+              <a href="/recipients/{{ recipient.id }}/delete" class="btn btn-sm btn-secondary">Удалить</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+{% endblock content %}

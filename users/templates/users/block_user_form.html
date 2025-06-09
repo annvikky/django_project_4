@@ -1,0 +1,14 @@
+<!-- templates/users/block_user_form.html -->
+{% extends "mailing_management/base.html" %}
+{% block content %}
+<div class="container mt-5">
+  <h2 class="mb-4">Блокировка пользователя: {{ object.email }}</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Сохранить</button>
+    <a href="{% url 'users:user_list' %}" class="btn btn-secondary">Назад</a>
+    <a href="{% url 'mailing_management:home' %}" class="btn btn-primary">Домой</a>
+  </form>
+</div>
+{% endblock %}

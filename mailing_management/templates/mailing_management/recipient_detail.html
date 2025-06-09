@@ -1,0 +1,41 @@
+<!-- mailing_management/templates/mailing_management/recipient_detail.html -->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+<body class="bg-light">
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Получатель рассылки</h3>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Почта:</label>
+              <p class="form-control-plaintext">{{ recipient.email }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Имя:</label>
+              <p class="form-control-plaintext">{{ recipient.name }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Комментарий:</label>
+              <p class="form-control-plaintext">{{ recipient.comment }}</p>
+            </div>
+
+            <div class="d-grid">
+              <a href="{% url 'mailing_management:recipient_update' recipient.pk %}" class="btn btn-secondary">Редактировать</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+{% endblock content %}

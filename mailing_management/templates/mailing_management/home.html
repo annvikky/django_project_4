@@ -1,0 +1,41 @@
+<!-- mailing_management/templates/mailing_management/home.html -->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h1 class="mb-4 text-center">Статистика рассылок</h1>
+
+    <div class="row text-center">
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Всего рассылок</h5>
+            <p class="display-5 fw-bold text-primary" id="totalMailings">{{ total_mailings }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Запущено</h5>
+            <p class="display-5 fw-bold text-success" id="runningMailings">{{ active_mailings }}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Уникальных получателей</h5>
+            <p class="display-5 fw-bold text-warning" id="uniqueRecipients">{{ unique_recipients }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{% endblock content %}

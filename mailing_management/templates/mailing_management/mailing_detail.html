@@ -1,0 +1,18 @@
+<!-- mailing_management/templates/mailing_management/message_detail.html -->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+<body class="bg-light">
+
+<h3>Статистика рассылки:</h3>
+<ul>
+  <li>Всего попыток: {{ mailing.total_attempts }}</li>
+  <li>Успешно: {{ mailing.successful_attempts }}</li>
+  <li>Неудачно: {{ mailing.failed_attempts }}</li>
+  <li>Процент успешных: {{ mailing.success_rate }}%</li>
+  <li>Последняя попытка: {{ mailing.last_attempt_date }}</li>
+</ul>
+
+</body>
+{% endblock content %}
