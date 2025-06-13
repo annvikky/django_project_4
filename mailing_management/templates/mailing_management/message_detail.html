@@ -1,0 +1,36 @@
+<!-- mailing_management/templates/mailing_management/message_detail.html -->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+<body class="bg-light">
+
+  <div class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Сообщение</h3>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Тема:</label>
+              <p class="form-control-plaintext">{{ message.subject }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Текст:</label>
+              <p class="form-control-plaintext">{{ message.body }}</p>
+            </div>
+
+            <div class="d-grid">
+              <a href="{% url 'mailing_management:message_update' message.pk %}" class="btn btn-secondary">Редактировать</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+{% endblock content %}

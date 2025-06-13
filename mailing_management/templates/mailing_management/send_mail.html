@@ -1,0 +1,23 @@
+<!-- mailing_management/templates/mailing_management/send_mail.html -->
+
+{% extends "mailing_management/base.html" %}
+
+{% block content %}
+  <h2>Отправка рассылки</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-primary">Отправить</button>
+  </form>
+
+  {% if messages %}
+    <ul class="mt-3">
+      {% for message in messages %}
+        <li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+          {{ message }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endblock %}

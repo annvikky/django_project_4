@@ -1,0 +1,45 @@
+<!-- mailing_management/templates/mailing_management/mailings_list.html-->
+{% extends 'mailing_management/base.html' %}
+{% load my_tags %}
+{% block title %} Управление рассылками {% endblock title %}
+{% block content %}
+
+<body class="bg-light">
+
+  <div class="container py-5">
+    <h2 class="mb-4 text-center">Список сообщений</h2>
+
+    <a href="/messages/create/" class="btn btn-success mb-3">Создать сообщение</a>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover bg-white shadow-sm">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">№</th>
+            <th scope="col">Тема</th>
+            <th scope="col">Содержание</th>
+          </tr>
+        </thead>
+        <tbody>
+           {% for message in messages %}
+
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ message.subject }}</td>
+            <td>{{ message.body }}</td>
+            <td>
+              {% if perms.mailing_management.change_message or user == message.user %}
+              <a href="/messages/{{ message.id }}" class="btn btn-sm btn-primary">Просмотр</a>
+              <a href="/messages/{{ message.id }}/update" class="btn btn-sm btn-secondary">Редактировать</a>
+              <a href="/messages/{{ message.id }}/delete" class="btn btn-sm btn-secondary">Удалить</a>
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</body>
+{% endblock content %}

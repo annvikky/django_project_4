@@ -1,0 +1,12 @@
+{% extends 'mailing_management/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Удаление профиля</h2>
+    <p>Вы уверены, что хотите удалить свой профиль? Это действие необратимо.</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Удалить</button>
+        <a href="{% url 'users:profile' %}" class="btn btn-secondary">Отмена</a>
+    </form>
+</div>
+{% endblock %}
